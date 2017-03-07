@@ -14,7 +14,6 @@ class PersonServiceCacheImpl @Inject()(cache:CacheApi) extends PersonService{
     try{
       val encPerson = person.copy(passwd = encryption.encrypt(person.passwd))
       val personList:ListBuffer[PersonDetails] = cache.get[ListBuffer[PersonDetails]]("personList").get
-
       cache.set("personList",personList+=encPerson)
       true
     }catch{
@@ -23,7 +22,6 @@ class PersonServiceCacheImpl @Inject()(cache:CacheApi) extends PersonService{
   }
 
   override def getPerson(username: String):PersonDetails = {
-
     val personList:ListBuffer[PersonDetails] = cache.get[ListBuffer[PersonDetails]]("personList").get
     personList.filter(person => (person.username == username))(0)
   }
@@ -31,5 +29,7 @@ class PersonServiceCacheImpl @Inject()(cache:CacheApi) extends PersonService{
   override def getPersonList():ListBuffer[PersonDetails] = {
     cache.get[ListBuffer[PersonDetails]]("personList").get
   }
+
+  def getPersonCache(person:PersonDetails):
 
 }

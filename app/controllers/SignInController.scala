@@ -19,7 +19,7 @@ class SignInController @Inject()(person:PersonService,cache:CacheApi)extends Con
           "error" -> "Something went wrong Please Try Again Later"
         )
       },
-      person => {
+      personData => {
 /*        val flag: Boolean = check(person)
         if (flag)
           Redirect(routes.ProfileController.profile()).withSession(
@@ -31,12 +31,13 @@ class SignInController @Inject()(person:PersonService,cache:CacheApi)extends Con
           )
         }*/
 
-        val demoUser: Option[PersonDetails] = cache.get[PersonDetails](person.username)
+        val demoUser: Option[PersonDetails] = cache.get[PersonDetails](personData.username)
 
         demoUser match {
-          case Some(result) if(person.username.equals((result.username))) => {Redirect(routes.ProfileController.profile()).withSession(("username" -> result.username))}
+          case Some(result) if(personData.username.equals((result.username))) => {Redirect(routes.ProfileController.profile()).withSession(("username" -> result.username))}
           case _ => {Redirect(routes.SignInController.signIn()).flashing("error" -> "username & password doesn't match")}
         }
+//        person.getPerson(personData)
       }
     )
   }

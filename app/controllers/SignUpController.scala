@@ -21,7 +21,8 @@ class SignUpController @Inject() (cache:CacheApi,person:PersonService)extends Co
       },
       personData => {
         //        person.addPerson(personData)
-        cache.set(personData.username, personData)
+//        cache.set(personData.username, personData)
+        person.addPerson(personData)
         Redirect(routes.ProfileController.profile()).withSession(
           "username" -> personData.username
         )

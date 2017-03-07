@@ -20,7 +20,7 @@ class PersonService {
 }*/
 
 trait PersonService {
-  def addPerson(person:PersonDetails)
+  def addPerson(person:PersonDetails):Boolean
   def getPersonList():ListBuffer[PersonDetails]
   def getPerson(username:String):PersonDetails
 }
