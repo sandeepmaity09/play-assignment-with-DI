@@ -1,0 +1,42 @@
+
+@(data:Models.PersonDetails)
+
+@main(data.username){
+
+<div>
+    <div id="wrapper">
+        <div id="login" class="animate form">
+            <h1> Profile</h1>
+            <div class="row" style="margin-top:20px;">
+                <div class="col-md-3" ></div>
+                <div class="col-md-6 info underline" >Name:@data.fName @data.mName @data.lName </div>
+                <div class="col-md-3" ></div>
+            </div>
+
+            <div class="row" style="margin-top:20px;">
+                <div class="col-md-4" ></div>
+                <div class="col-md-4 restInfo" >UserName:@data.username</div>
+                <div class="col-md-4" ></div>
+            </div>
+            <div class="row" style="margin-top:20px;">
+                <div class="col-md-4" ></div>
+                <div class="col-md-4 restInfo" >DateOfBirth:@data.age</div>
+                <div class="col-md-4" ></div>
+            </div>
+            <div class="row" style="margin-top:20px;">
+                <div class="col-md-4" ></div>
+                <div class="col-md-4 restInfo" >Gender:@data.gender </div>
+                <div class="col-md-4" ></div>
+            </div>
+            <div class="row" style="margin-top:20px;">
+                <div class="col-md-4" ></div>
+                <div class="col-md-4 restInfo" >Likes To:@data.hobbies</div>
+                <div class="col-md-4" ></div>
+            </div>
+            <div class="btn btn-success">
+                <button class="btn btn-danger"><a href="@routes.LogoutController.logout()">LogOut</a></button>
+            </div>
+        </div>
+    </div>
+</div>
+}
