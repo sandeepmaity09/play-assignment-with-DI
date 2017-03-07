@@ -30,6 +30,6 @@ class PersonServiceCacheImpl @Inject()(cache:CacheApi) extends PersonService{
     cache.get[ListBuffer[PersonDetails]]("personList").get
   }
 
-  def getPersonCache(person:PersonDetails):
+//  def getPersonCache(person:PersonDetails):
 
 }
