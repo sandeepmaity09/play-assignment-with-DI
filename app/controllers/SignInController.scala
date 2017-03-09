@@ -6,7 +6,7 @@ import play.api.cache.CacheApi
 import play.api.mvc._
 import services.PersonService
 
-class SignInController @Inject()(person:PersonService,cache:CacheApi)extends Controller {
+class SignInController @Inject()(person: PersonService, cache: CacheApi) extends Controller {
 
   def signIn = Action { implicit request =>
     Ok(views.html.signinpage())
@@ -20,39 +20,31 @@ class SignInController @Inject()(person:PersonService,cache:CacheApi)extends Con
         )
       },
       personData => {
-        /*        val flag: Boolean = check(person)
-        if (flag)
-          Redirect(routes.ProfileController.profile()).withSession(
-            "username" -> person.username
-          )
-        else {
-          Redirect(routes.SignInController.signIn()).flashing(
-            "error" -> "Username and password wrong"
-          )
-        }*/
+        val personD = person.getPerson(personData.username)
+        //        println(personD)
+                println(personData)
+        if (personD == null) {
+          Redirect(routes.SignInController.signIn()).flashing("error" -> "User Doesn't Exist")
+        }
 
-        /*        val demoUser: Option[PersonDetails] = cache.get[PersonDetails](personData.username)
-
-        demoUser match {
-          case Some(result) if(personData.username.equals((result.username))) => {Redirect(routes.ProfileController.profile()).withSession(("username" -> result.username))}
-          case _ => {Redirect(routes.SignInController.signIn()).flashing("error" -> "username & password doesn't match")}
-        }*/
-        person.getPerson(personData.username)
-        Redirect(routes.ProfileController.profile()).withSession("username" -> personData.username)
+        if (person.checkPerson(personData.username, personData.passwd)) {
+          if (personD.isEnabled) {
+            Redirect(routes.ProfileController.profile()).withSession(
+              "username" -> personData.username
+            )
+          }
+          else {
+            Redirect(routes.SignInController.signIn()).flashing(
+              "error" -> "Account Disabled. Please Contact Your Admininstrator"
+            )
+          }
+        }
+        else Redirect(routes.SignInController.signIn()).flashing(
+          "error" -> "Username Password Didn't Match"
+        )
       }
     )
   }
-
-//
-//  def check(person:LogingDetails):Boolean={
-//    val listpwdnotmatch = person.personList.map(
-//      value=>(value.username,value.passwd)
-//    )
-//    if(listpwdnotmatch.contains((person.username,person.passwd)))
-//      true
-//    else
-//      false
-//  }
 
 
 }

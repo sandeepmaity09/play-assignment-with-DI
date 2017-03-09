@@ -2,13 +2,14 @@ package controllers
 
 import com.google.inject.Inject
 import models.PersonDetailsMapping
+import play.api.Configuration
 import play.api.mvc._
 import play.api.cache._
 import services.PersonService
 
-class SignUpController @Inject() (cache:CacheApi,person:PersonService)extends Controller {
+class SignUpController @Inject() (cache:CacheApi,person:PersonService,config:Configuration)extends Controller {
 
-  def signUp = Action {
+  def signUp = Action { implicit request =>
     Ok(views.html.signuppage())
   }
 
@@ -20,12 +21,28 @@ class SignUpController @Inject() (cache:CacheApi,person:PersonService)extends Co
         )
       },
       personData => {
-        //        person.addPerson(personData)
-//        cache.set(personData.username, personData)
-        person.addPerson(personData)
-        Redirect(routes.ProfileController.profile()).withSession(
-          "username" -> personData.username
-        )
+
+//        val persons = person.getPersonList()
+//        println(persons)
+        val flag = person.checkAddPerson(personData.username)
+//        println(flag)
+//        println(persons)
+
+        if(!flag){
+//          println(person.getPersonList())
+          person.addPerson(personData)
+//          println(person.getPersonList())
+          Redirect(routes.ProfileController.profile()).withSession(
+            "username" -> personData.username
+          )
+        }
+        else {
+//          println(person.getPersonList())
+          Redirect(routes.SignUpController.signUp()).flashing(
+            "errors" -> "User already exist"
+          )
+        }
+
       }
     )
   }

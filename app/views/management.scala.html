@@ -1,0 +1,51 @@
+@import scala.collection.mutable.ListBuffer
+
+@(list:ListBuffer[Models.PersonDetails],loged:Models.PersonDetails)
+
+@main("nothing"){
+<div>
+    <div id="wrapper">
+        <div id="login" class="animate form">
+            <h1> Management Console</h1>
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>Username</th>
+                    <!--<th>Account Status</th>-->
+                    <th>Access/Control</th>
+                </tr>
+                </thead>
+                <tbody>
+                @for(person <- list){
+                @if(person.username != loged.username){
+<!--                    <td>@person.username</td>
+                    <td>@person.isEnabled</td>-->
+                    <!--<td><button id="accesscontrol" onclick="@routes.ManagementController.toggle()">Suspend</button></td>-->
+                    <form class="form" method="post" action="@routes.ManagementController.toggle()">
+                        <tr>
+                            <input type="hidden" id="personname" name="personname" value="@person.username">
+                            <td><input type="text" id="pr" name="pr" value="@person.username" disabled></td>
+                        <!--<td><input type="text" id="isEnabled"   name="isEnabled" value="@person.isEnabled" disabled></td>-->
+                        <td><input type="submit" class="btn btn-default" id="status" name="status"
+                               @if(person.isEnabled){
+                               value="Disable"
+                               }
+                               else{
+                               value="Enable"
+                               }
+                        >
+                        </td>
+                        </tr>
+                    </form>
+                </tr>
+                }
+                }
+                </tbody>
+            </table>
+            <div class="row">
+                <button><a href="@routes.ProfileController.profile()">Go to Profile</a></button>
+            </div>
+        </div>
+    </div>
+</div>
+}

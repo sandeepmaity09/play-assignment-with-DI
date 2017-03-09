@@ -2,15 +2,14 @@
 @(data:Models.PersonDetails)
 
 @main(data.username){
-
 <div>
     <div id="wrapper">
         <div id="login" class="animate form">
             <h1> Profile</h1>
             <div class="row" style="margin-top:20px;">
-                <div class="col-md-3" ></div>
-                <div class="col-md-6 info underline" ><strong>Name:</strong>@data.fName @data.mName @data.lName </div>
-                <div class="col-md-3" ></div>
+                <div class="col-md-4" ></div>
+                <div class="col-md-4 info underline" ><strong>Name:</strong>@data.fName @data.mName @data.lName </div>
+                <div class="col-md-4" ></div>
             </div>
 
             <div class="row" style="margin-top:20px;">
@@ -33,6 +32,19 @@
                 <div class="col-md-4 restInfo" ><strong>Hobbies:</strong>@data.hobbies</div>
                 <div class="col-md-4" ></div>
             </div>
+            @if(data.isAdmin){
+            <div class="row" style="margin-top:20px; align:center">
+                <div class="col-md-4"></div>
+                <div class="col-md-4"></div>
+                <div class="col-md-4 restInfo btn-success">
+                    <button class="btn btn-danger"><a href="@routes.ManagementController.manage()">Manage User</a></button>
+<!--                    <label class="switch">
+                        <input type="checkbox">
+                        <div class="slider"></div>-->
+                    </label>
+                </div>
+            </div>
+            }
             <div class="btn btn-success">
                 <button class="btn btn-danger"><a href="@routes.LogoutController.logout()">LogOut</a></button>
             </div>

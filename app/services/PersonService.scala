@@ -23,5 +23,7 @@ trait PersonService {
   def addPerson(person:PersonDetails):Boolean
   def getPersonList():ListBuffer[PersonDetails]
   def getPerson(username:String):PersonDetails
+  def checkPerson(username:String,passwd:String):Boolean
+  def checkAddPerson(username:String):Boolean
 }
 

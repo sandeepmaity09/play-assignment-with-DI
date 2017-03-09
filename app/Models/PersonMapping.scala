@@ -14,11 +14,13 @@ object PersonDetailsMapping {
       "lName" -> nonEmptyText,
       "email" -> nonEmptyText,
       "username" -> nonEmptyText,
-      "passwd" -> nonEmptyText,
-      "mobile" -> nonEmptyText,
+      "passwd" -> nonEmptyText(minLength = 6),
+      "mobile" -> nonEmptyText(minLength = 10,maxLength = 10),
       "gender" -> nonEmptyText,
       "age" -> number(min=18,max=75),
-      "hobbies" -> text
+      "hobbies" -> text,
+      "isAdmin" -> boolean,
+      "isEnabled" -> boolean
     )(PersonDetails.apply)(PersonDetails.unapply)
   }
 }

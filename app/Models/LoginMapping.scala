@@ -7,8 +7,8 @@ object LogingDetailsMapping {
 
   val LogingDetailsForm:Form[LogingDetails] = Form {
     mapping(
-      "username" -> text,
-      "passwd" -> text
+      "username" -> nonEmptyText,
+      "passwd" -> nonEmptyText
     )(LogingDetails.apply)(LogingDetails.unapply)
   }
 
