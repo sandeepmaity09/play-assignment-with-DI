@@ -7,7 +7,7 @@ import play.api.mvc._
 import play.api.cache._
 import services.PersonService
 
-class SignUpController @Inject() (cache:CacheApi,person:PersonService,config:Configuration)extends Controller {
+class SignUpController @Inject()(person:PersonService,config:Configuration)extends Controller {
 
   def signUp = Action { implicit request =>
     Ok(views.html.signuppage())

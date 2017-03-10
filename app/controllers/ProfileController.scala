@@ -6,7 +6,7 @@ import play.api.mvc._
 import play.api.cache._
 import services.PersonService
 
-class ProfileController @Inject()(cache:CacheApi,person:PersonService)  extends Controller {
+class ProfileController @Inject()(person:PersonService)  extends Controller {
 
   def profile = Action { implicit request =>
     request.session.get("username").map { username =>
