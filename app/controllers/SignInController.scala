@@ -2,11 +2,10 @@ package controllers
 
 import Models._
 import com.google.inject.Inject
-import play.api.cache.CacheApi
 import play.api.mvc._
 import services.PersonService
 
-class SignInController @Inject()(person: PersonService, cache: CacheApi) extends Controller {
+class SignInController @Inject()(person: PersonService) extends Controller {
 
   def signIn = Action { implicit request =>
     Ok(views.html.signinpage())
