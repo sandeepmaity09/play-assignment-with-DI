@@ -19,8 +19,8 @@ class ProfileControllerSpec extends PlaySpec with OneAppPerTest with MockitoSuga
 //      val result:Future[Result] = singincontroller.signIn().apply(FakeRequest())
       val result:Future[Result] = profilecontroller.profile().apply(FakeRequest())
       val bodyText:String = contentAsString(result)
-      status(result) mustBe OK
-      contentType(result) mustBe Some("text/html")
+      status(result) mustBe 401
+//      contentType(result) mustBe Some("text/html")
     }
   }
 }
