@@ -1,23 +1,26 @@
 package controllers
 
-import play.api.Routes
-import play.api.mvc.Action
-import play.api.mvc.Controller
-import play.api.mvc.EssentialAction
-import play.core.Router.JavascriptReverseRoute
-import play.core.Router._
-import routes.javascript.Application.index
-import routes.javascript.Application.ajaxCall
+import play.api.mvc._
+import play.api.routing.JavaScriptReverseRouter
 
-object JavascriptRoute extends Controller {
 
-  val appRoutes: List[JavascriptReverseRoute] = List(index, ajaxCall)
+class JavaScriptController extends Controller{
 
-  val javascriptRouters = appRoutes
-
-  def javascriptRoutes: EssentialAction = Action { implicit request =>
-    import routes.javascript._
-    Ok(Routes.javascriptRouter("jsRoutes")(javascriptRouters: _*)).as("text/javascript")
+  def javascriptRoutes = Action { implicit request =>
+    Ok(
+      JavaScriptReverseRouter("jsRoutes")(
+        routes.javascript.HomeController.index,
+        routes.javascript.CountController.count,
+        routes.javascript.SignInController.signIn,
+        routes.javascript.SignInController.signInProcess,
+        routes.javascript.SignUpController.signUp,
+        routes.javascript.SignUpController.addPersonDetails,
+        routes.javascript.ProfileController.profile,
+        routes.javascript.ManagementController.manage,
+        routes.javascript.LogoutController.logout,
+        routes.javascript.ManagementController.toggle
+      )
+    ).as("text/javascript")
   }
 
 }
