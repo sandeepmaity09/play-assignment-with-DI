@@ -17,11 +17,14 @@ GET     /assets/*file               controllers.Assets.versioned(path="/public",
 
 # my controllers
 
-POST     /signedin                   controllers.SignInController.signInProcess
-GET   /signin                     controllers.SignInController.signIn
+
+GET     /javascriptRoutes           controllers.JavascriptController.javascriptRoutes
+POST    /signedin                   controllers.SignInController.signInProcess
+GET     /signin                     controllers.SignInController.signIn
 GET     /signup                     controllers.SignUpController.signUp
 POST    /addDetails                 controllers.SignUpController.addPersonDetails
 GET     /profile                    controllers.ProfileController.profile
 GET     /logout                     controllers.LogoutController.logout
 GET     /manage                     controllers.ManagementController.manage
 POST    /toggle                     controllers.ManagementController.toggle
+# GET     /javascriptRoutes           controllers.JavascriptController.javascriptRoutes

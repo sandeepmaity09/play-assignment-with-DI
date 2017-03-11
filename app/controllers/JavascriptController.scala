@@ -4,7 +4,7 @@ import play.api.mvc._
 import play.api.routing.JavaScriptReverseRouter
 
 
-class JavaScriptController extends Controller{
+class JavascriptController extends Controller{
 
   def javascriptRoutes = Action { implicit request =>
     Ok(
